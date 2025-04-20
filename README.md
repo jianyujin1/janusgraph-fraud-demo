@@ -35,7 +35,7 @@ If you see `Channel started at port your_number`, JanusGraph is running.
 cd C:\Users\host_number\Desktop
 mkdir janus_env
 cd janus_env
-python -m venv venv
+#python -m venv venv
 venv\Scripts\activate
 ```
 
