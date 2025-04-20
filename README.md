@@ -23,7 +23,7 @@ cd C:\janusgraph-full-1.1.0\janusgraph-full-1.1.0
 bin\gremlin-server.bat conf\gremlin-server\gremlin-server.yaml
 ```
 
-If you see `Channel started at port 8182`, JanusGraph is running.
+If you see `Channel started at port your_number`, JanusGraph is running.
 
 ---
 
@@ -32,7 +32,7 @@ If you see `Channel started at port 8182`, JanusGraph is running.
 **3.1 Create and Activate Virtual Environment**
 
 ```bash
-cd C:\Users\82108\Desktop
+cd C:\Users\host_number\Desktop
 mkdir janus_env
 cd janus_env
 python -m venv venv
@@ -54,7 +54,7 @@ python -m ipykernel install --user --name=janus_env --display-name "Python (janu
 jupyter notebook
 ```
 
-Go to `http://localhost:8888/tree`, then click:  
+Go to `http://localhost:your_number/tree`, then click:  
 `New > Notebook > Python (janus_env)`
 
 ---
@@ -65,7 +65,7 @@ Go to `http://localhost:8888/tree`, then click:
 from gremlin_python.driver import client, serializer
 
 gremlin_client = client.Client(
-    'ws://localhost:8182/gremlin',
+    'ws://localhost:your_number/gremlin',
     'g',
     message_serializer=serializer.GraphSONSerializersV2d0()
 )
@@ -79,12 +79,12 @@ gremlin_client = client.Client(
 queries = [
     "g.addV('user').property('user_id', 'u001').property('name', 'Alice')",
     "g.addV('device').property('device_id', 'd001').property('type', 'mobile')",
-    "g.addV('ip').property('ip_addr', '192.168.1.10')",
+    "g.addV('ip').property('ip_addr', '192.169.2.10')",
     "g.addV('transaction').property('tx_id', 't001').property('amount', 1200)",
     "g.addV('merchant').property('merchant_id', 'm001').property('name', 'LuxuryStore')",
 
     "g.V().has('user', 'user_id', 'u001').as('u').V().has('device', 'device_id', 'd001').addE('uses').from('u')",
-    "g.V().has('user', 'user_id', 'u001').as('u').V().has('ip', 'ip_addr', '192.168.1.10').addE('logs_in_from').from('u')",
+    "g.V().has('user', 'user_id', 'u001').as('u').V().has('ip', 'ip_addr', '192.169.2.10').addE('logs_in_from').from('u')",
     "g.V().has('user', 'user_id', 'u001').as('u').V().has('transaction', 'tx_id', 't001').addE('initiates').from('u')",
     "g.V().has('transaction', 'tx_id', 't001').as('t').V().has('merchant', 'merchant_id', 'm001').addE('pays_to').from('t')"
 ]
@@ -155,7 +155,7 @@ def generate_fraud_explanation(log):
 log_sample = {
     'user': 'u001',
     'device': 'd001',
-    'ip': '192.168.1.10',
+    'ip': '192.169.2.10',
     'merchant': 'LuxuryStore',
     'tx_amount': 1200,
     'action': '거래 차단 및 사용자 알림'
